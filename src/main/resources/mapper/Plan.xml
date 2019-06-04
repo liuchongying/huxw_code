@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huxw.demo.dao.PlanDao">
+    <select id="queryPlan" resultType="com.huxw.demo.entity.Plan">
+        SELECT fd_id, fd_name,
+        fd_plan_no, fd_is_asso, fd_asso_date
+        FROM plan
+    </select>
+    <select id="queryPlanById" resultType="com.huxw.demo.entity.Plan">
+        SELECT fd_id, fd_name,
+        fd_plan_no, fd_is_asso, fd_asso_date
+        FROM plan
+        WHERE
+        fd_id=#{planId}
+    </select>
+    <insert id="insertPlan" parameterType="com.huxw.demo.entity.Plan">
+        INSERT INTO plan (
+        fd_id,
+        fd_name,
+        fd_plan_no,
+        fd_is_asso,
+        fd_asso_date,
+        fd_create_date,
+        fd_update_date
+        )
+        VALUES
+        (
+        #{fdId},
+        #{fdName},
+        #{fdPlanNo},
+        #{fdIsAsso},
+        #{fdAssoDate},
+        #{fdCreateDate},
+        #{fdUpdateDate}
+        )
+    </insert>
+    <update id="updatePlan" parameterType="com.huxw.demo.entity.Plan">
+        UPDATE plan
+        <set>
+            <if test="fdName != null">fd_name = #{fdName},</if>
+            <if test="fdPlanNo != null">fd_plan_no = #{fdPlanNo},</if>
+            <if test="fdUpdateDate != null">fd_update_date = #{fdUpdateDate}</if>
+        </set>
+        WHERE
+        fd_id = #{fdId}
+    </update>
+    <delete id="deletePlan" parameterType="com.huxw.demo.entity.Plan">
+        DELETE
+        FROM
+        plan
+        WHERE
+        fd_id = #{fdId}
+    </delete>
+</mapper>

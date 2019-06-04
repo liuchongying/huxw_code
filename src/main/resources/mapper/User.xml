@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huxw.demo.dao.UserDao">
+    <select id="queryUserByName" resultType="com.huxw.demo.entity.User">
+        SELECT id, user_name,
+        password, email, age
+        FROM user
+        WHERE
+        user_name=#{userName}
+    </select>
+
+    <select id="queryUserByNamePassword" resultType="com.huxw.demo.entity.User">
+        SELECT id, user_name,
+        password, email, age
+        FROM user
+        WHERE
+        user_name= #{userName}
+        AND password = #{password}
+    </select>
+
+    <select id="queryUser" resultType="com.huxw.demo.entity.User">
+        SELECT id, user_name,
+        password, email, age
+        FROM user
+    </select>
+
+    <insert id="insertUser" parameterType="com.huxw.demo.entity.User">
+        INSERT INTO user (
+            user_name,
+            password,
+            email,
+            age
+            )
+            VALUES
+            (
+            #{userName},
+            #{password},
+            #{email},
+            #{age}
+        )
+    </insert>
+    <delete id="deleteUser" parameterType="com.huxw.demo.entity.User">
+        DELETE
+        FROM
+        user
+        WHERE
+        id = #{id}
+    </delete>
+</mapper>
